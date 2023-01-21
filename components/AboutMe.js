@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { aboutParagraph } from '../project_data/project_data';
+import { aboutParagraph } from '../project_data/test_entries';
 
 const AboutMe = () => {
     return (

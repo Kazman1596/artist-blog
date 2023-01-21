@@ -11,6 +11,6 @@
 
 @layer components {
     .container-layout {
-        @apply flex bg-gray-100 justify-center items-center h-full w-full snap-start
+        @apply flex bg-black justify-center items-center h-full w-full snap-start
     }
 }
