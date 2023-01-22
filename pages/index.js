@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Menu from '../components/Menu'
 import Feed from '../components/Feed'
 import EntryModal from '../components/EntryModal'
+import UploadModal from '../components/UploadModal'
 
 export default function Home() {
 
@@ -29,6 +30,10 @@ export default function Home() {
           {/* Entry Modal */}
 
           <EntryModal />
+
+          {/* Upload Modal */}
+
+          <UploadModal />
 
         </div>
         

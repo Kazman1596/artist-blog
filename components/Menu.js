@@ -5,10 +5,13 @@ import { Facebook, Instagram, CloudCircle as SoundCloud, GraphicEq as Spotify, T
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { useSession } from 'next-auth/react';
+import { useRecoilState } from 'recoil'
+import { uploadModalState } from '../atom/uploadAtom';
 
 const Menu = () => {
     const [click, setClick] = useState(false)
     const {data: session } = useSession()
+    const [open, setOpen] = useRecoilState(uploadModalState)
     const permission = process.env.PERMISSIONS
 
     const handleClick = () => setClick(!click)
@@ -25,6 +28,7 @@ const Menu = () => {
             <div className={`${click ? 'hidden' : '' } bg-black p-8 w-full`}>
                 <div className='absolute right-[75px]'>
                     <SignIn />
+                    {(session) ? <button className='text-white text-[.73rem] ' onClick={() => setOpen(true)}>add new post</button> : null}
                 </div>
                 <h1 className='font-labelle text-6xl m-5 text-gray-50 text-center'>KAZ</h1>
                 <div className='justify-center items-center flex'>
@@ -34,7 +38,6 @@ const Menu = () => {
                     <MenuItem onClick={closeMobileMenu} link='/' text='news'/>
                     <MenuItem onClick={closeMobileMenu} link='/' text='about'/>
                     <MenuItem onClick={closeMobileMenu} link='/' text='contact'/>
-                    {(session) ? <MenuItem link='/edit' text='add new post' /> : <MenuItem link='' text='nice try' />}
                 </div>
                 <div>
                     <div className='flex justify-center mt-10'>
