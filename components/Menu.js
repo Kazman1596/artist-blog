@@ -12,7 +12,6 @@ const Menu = () => {
     const [click, setClick] = useState(false)
     const {data: session } = useSession()
     const [open, setOpen] = useRecoilState(uploadModalState)
-    const permission = process.env.PERMISSIONS
 
     const handleClick = () => setClick(!click)
     const closeMobileMenu = () => setClick(false)
