@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Entry from './Entry';
-import { entryArray } from '../project_data/test_entries';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const Projects = () => {
+    const [entries, setEntries] = useState([])
+    useEffect(() => {
+        const unsubscribe = onSnapshot(
+            query(collection(db, 'entries'), orderBy(('timestamp'), 'desc')), (snapshot) => {
+                setEntries(snapshot.docs)
+            }
+        )
+        
+    })
 
     return (
         <div id='projects' className='flex justify-center'>
+        
                 <div className='m-5'>
-                    {entryArray.map(entry => (
-                        <Entry key={entry.id} title={entry.title} id={entry.id} description={entry.description} img={entry.img} />
+                    {entries.map(entry => (
+                        <Entry 
+                            key={entry.id} 
+                            title={entry.data().title} 
+                            id={entry.id} 
+                            description={entry.data().description} 
+                            img={entry.data().image} 
+                        />
                     ))}
                 </div>
         </div>

@@ -7,6 +7,8 @@ import Image from 'next/image';
 import { useRecoilState } from 'recoil';
 import { uploadModalState } from '../atom/uploadAtom'
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
+import { CircularProgress } from '@mui/material';
+
 
 
 
@@ -76,14 +78,14 @@ export default function UploadModal() {
                 >
                     <div className='flex justify-center'>
                         {selectedFile ? (
-                            <Image className='w-auto max-h-[500px] object-cover cursor-pointer' onClick={() => setSelectedFile(null)} src={selectedFile} width={300} height={300} alt='selected_image' />
+                            <Image className='w-auto max-h-[300px] object-cover cursor-pointer' onClick={() => setSelectedFile(null)} src={selectedFile} width={300} height={300} alt='selected_image' />
                         ) : (<CameraAltOutlined onClick={() => filePickerRef.current.click()} className='text-5xl m-2 p-1 text-white cursor-pointer border border-black hover:border-white hover:text-sky-500 duration-200' />)}
                         <input type='file' hidden ref={filePickerRef} onChange={addImageToPost} />
                     </div>
                     <div className='flex justify-center m-5'>
                         <input 
                             className='w-[400px]'
-                            type='text' 
+                            type='text'
                             name="title" 
                             id="title" 
                             placeholder="Title"
@@ -91,23 +93,27 @@ export default function UploadModal() {
                         />
                     </div>
                     <div className='flex justify-center m-5'>
-                        <input
-                            className='w-[500px]'
-                            type='text' 
+                        <textarea
+                            className='w-[500px] h-[250px] text-sm'
                             name='description' 
-                            id='description' 
+                            id='description'
                             placeholder="Write something here..." 
                             ref={descriptionRef}
                         />
                     </div>
-                    <div className='flex justify-center m-5'>
-                        <button
-                            disabled = {loading}
-                            className='text-white cursor-pointer border p-1 border-black hover:border-white hover:text-sky-500 duration-200' 
-                            onClick={uploadPost}>
+                    {!loading ? (
+                        <div className='flex justify-center m-5'>
+                            <button
+                                className='text-white cursor-pointer border p-1 border-black hover:border-white hover:text-sky-500 duration-200' 
+                                onClick={uploadPost}>
                                 Upload
-                        </button>
-                    </div>
+                            </button>
+                        </div>
+                     ) : (
+                        <div className='flex text-white justify-center'>
+                            <CircularProgress color='inherit' />
+                        </div>
+                    )}
                 </Modal>
             )}
             

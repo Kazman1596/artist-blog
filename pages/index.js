@@ -3,6 +3,7 @@ import Menu from '../components/Menu'
 import Feed from '../components/Feed'
 import EntryModal from '../components/EntryModal'
 import UploadModal from '../components/UploadModal'
+import EditModal from '../components/EditModal'
 
 export default function Home() {
 
@@ -34,6 +35,10 @@ export default function Home() {
           {/* Upload Modal */}
 
           <UploadModal />
+
+          {/* Edit Modal */}
+
+          <EditModal />
 
         </div>
         
